@@ -17,6 +17,7 @@ class Sounds:
         if Sounds.__instance:
             raise Exception("Object Exists")
         mix.init()
+        mix.set_num_channels(300)
         directory = "media/sounds"
         self.sounds = {name: mix.Sound(f"{directory}/{name}") for name in os.listdir(directory)}
         Sounds.__instance = self

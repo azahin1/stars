@@ -18,13 +18,15 @@ class PlayerStar(Star):
         )
         self.setColour(self.data["colour"]["player"])
         self.range = int(self.window.getDimentions()[1]*0.7)
+        self.frames = 0
 
-    def playSounds(self, frames):
+    def playSounds(self):
         loader = Sounds.getInstance()
-        if not frames % randrange(self.data["fps"], 6*self.data["fps"], self.data["fps"]//2):
+        if not self.frames % randrange(self.data["fps"], 6*self.data["fps"], self.data["fps"]//2):
             note = loader.getSounds()[choice(self.data["notes"]["drone"])]
-            note.set_volume(0.3)
-            # note.play()
+            note.set_volume(0.1)
+            note.play()
+        self.frames += 1
 
     def getRange(self):
         return self.range

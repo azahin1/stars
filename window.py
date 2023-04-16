@@ -34,6 +34,7 @@ class Window:
     def getEvents(self): # inputs in a window
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
+                pygame.mixer.quit()
                 pygame.quit()
                 exit()
         self.keysPressed = pygame.key.get_pressed()

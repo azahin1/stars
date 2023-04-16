@@ -3,20 +3,19 @@ title: Star sprite
 '''
 from sprites import Sprite
 from pygame import K_UP, K_DOWN, K_LEFT, K_RIGHT, K_w, K_a, K_s, K_d
-from random import randint
+from random import randint, choice
 from json import load
 
 class Star(Sprite): # inherits from Sprite class
     def __init__(self, window):
         Sprite.__init__(self, window)
         with open("loader.json") as f:
-            data = load(f)
-        size = randint(1, 5)
-        self.setDimentions(size, size)
+            self.data = load(f)
+        self.size = randint(1, 4)
+        self.setDimentions(self.size, self.size)
         self.setPOS(randint(0, self.window.getDimentions()[0] - self.getDimentions()[0]), randint(0, self.window.getDimentions()[1] - self.getDimentions()[1]))
-        self.setColour(data["colour"]["star"])
-        self.sprite.set_alpha(0)
-        self.accValue = (size + 2)/10
+        self.setColour(self.data["colour"]["star"])
+        self.accValue = (self.size + 2)/10
         self.friction = -0.1
         self.velocity = [0, 0]
         self.accelaration = [0, 0]
@@ -45,9 +44,13 @@ class Star(Sprite): # inherits from Sprite class
             if self.pos[i] < 0: # start wall
                 self.pos[i] = self.window.getDimentions()[i] - self.getDimentions()[i]
                 self.pos[j] = randint(0, self.window.getDimentions()[j] - self.getDimentions()[j])
+                self.note = f"pluck_{choice(self.data['notes']['pluck'])}"
+                self.size = randint(1, 5)
             if self.pos[i] > self.window.getDimentions()[i] - self.getDimentions()[i]: # end wall
                 self.pos[i] = 0
                 self.pos[j] = randint(0, self.window.getDimentions()[j] - self.getDimentions()[j])
+                self.note = f"pluck_{choice(self.data['notes']['pluck'])}"
+                self.size = randint(1, 5)
 
     def proximity(self, player):
         dist = 0
@@ -57,7 +60,7 @@ class Star(Sprite): # inherits from Sprite class
 
         brightness = max(0, int(255*((player.getRange() - dist)/player.getRange())))
         self.sprite.set_alpha(brightness)
-    
+
 if __name__ == "__main__":
     from pygame import init
     from window import Window

@@ -1,13 +1,14 @@
 {
     "title": "Stars",
-    "fps": 60,
+    "fps": 30,
     "dimentions": [1294, 800],
     "colour": {
         "background": [7, 10, 12],
-        "star": [170, 180, 190],
-        "player": [190, 200, 210]
+        "star": [135, 136, 156],
+        "player": [244, 253, 173]
     },
     "notes": {
-        "drone": ["pad_2g.wav", "pad_3a.wav", "pad_3c.wav", "pad_3d.wav", "pad_3f.wav", "pad_3g.wav", "pad_4a.wav", "pad_4c.wav", "pad_4d.wav", "pad_4f.wav", "pad_4g.wav"]
+        "drone": ["pad_2g.wav", "pad_3a.wav", "pad_3c.wav", "pad_3d.wav", "pad_3f.wav", "pad_3g.wav", "pad_4a.wav", "pad_4c.wav", "pad_4d.wav", "pad_4f.wav", "pad_4g.wav"],
+        "pluck": ["1c", "1d", "1f", "1g", "2a", "2c", "2d", "2f", "2g", "3a", "3c", "3d", "3f", "3g", "4a"]
     }
 }
