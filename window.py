@@ -8,9 +8,7 @@ class Window:
     def __init__(self):
         self.title = TITLE # title of the window
         self.fps = FPS # frames per second
-        self.width = WIDTH
-        self.height = HEIGHT
-        self.dimentions = (self.width, self.height) # dimentions of the window
+        self.dimentions = [WIDTH, HEIGHT] # dimentions of the window
         self.background = BACKGROUND_COLOUR # colour of the window
         self.frame = pygame.time.Clock() # updates the window in a frame
         self.screen = pygame.display.set_mode(self.dimentions)
@@ -37,11 +35,8 @@ class Window:
                 exit()
         self.keysPressed = pygame.key.get_pressed()
 
-    def getWidth(self): # gets the width of the window
-        return self.width
-
-    def getHeight(self): # gets the height of the window
-        return self.height
+    def getDimentions(self): # gets the dimentions of the window
+        return self.dimentions
 
     def getKeysPressed(self): # gets the keys pressed in the window
         return self.keysPressed
