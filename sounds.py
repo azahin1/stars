@@ -16,7 +16,7 @@ class Sounds:
     def __init__(self):
         if Sounds.__instance:
             raise Exception("Object Exists")
-        mix.init()
+        mix.init(buffer = 4096)
         mix.set_num_channels(300)
         directory = "media/sounds"
         self.sounds = {name: mix.Sound(f"{directory}/{name}") for name in os.listdir(directory)}
