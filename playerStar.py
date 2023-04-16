@@ -4,7 +4,7 @@ title: Player's star sprite
 from star import Star
 from json import load
 from sounds import Sounds
-from random import choice
+from random import choice, randrange
 
 class PlayerStar(Star):
     def __init__(self, window):
@@ -20,7 +20,7 @@ class PlayerStar(Star):
 
     def playSounds(self, frames):
         loader = Sounds.getInstance()
-        if not frames % (self.data["fps"]*(choice(range(6))/2 + 1)):
+        if not frames % randrange(self.data["fps"], 6*self.data["fps"], self.data["fps"]//2):
             note = loader.getSounds()[choice(self.data["notes"]["drone"])]
             note.set_volume(0.3)
             note.play()
