@@ -2,14 +2,16 @@
 Title: Window frame
 '''
 import pygame
-from loader import *
+from json import load
 
 class Window:
     def __init__(self):
-        self.title = TITLE # title of the window
-        self.fps = FPS # frames per second
-        self.dimentions = [WIDTH, HEIGHT] # dimentions of the window
-        self.background = BACKGROUND_COLOUR # colour of the window
+        with open("loader.json") as f:
+            data = load(f)
+        self.title = data["title"] # title of the window
+        self.fps = data["fps"] # frames per second
+        self.dimentions = data["dimentions"] # dimentions of the window
+        self.background = data["colour"]["background"] # colour of the window
         self.frame = pygame.time.Clock() # updates the window in a frame
         self.screen = pygame.display.set_mode(self.dimentions)
         self.screen.fill(self.background) # colours the window

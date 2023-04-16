@@ -1,0 +1,10 @@
+{
+    "title": "Stars",
+    "fps": 60,
+    "dimentions": [1294, 800],
+    "colour": {
+        "background": [7, 10, 12],
+        "star": [170, 180, 190],
+        "player": [190, 200, 210]
+    }
+}
