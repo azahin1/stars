@@ -14,6 +14,7 @@ class Star(Sprite): # inherits from Sprite class
         self.setDimentions(2, 2)
         self.setPOS(randint(0, self.window.getDimentions()[0] - self.getDimentions()[0]), randint(0, self.window.getDimentions()[1] - self.getDimentions()[1]))
         self.setColour(data["colour"]["star"])
+        self.sprite.set_alpha(0)
         self.accValue = 0.5
         self.friction = -0.1
         self.velocity = [0, 0]
@@ -46,6 +47,15 @@ class Star(Sprite): # inherits from Sprite class
             if self.pos[i] > self.window.getDimentions()[i] - self.getDimentions()[i]: # end wall
                 self.pos[i] = 0
                 self.pos[j] = randint(0, self.window.getDimentions()[j] - self.getDimentions()[j])
+
+    def proximity(self, player):
+        dist = 0
+        for i in range(2):
+            dist += (self.pos[i] - player.getPOS()[i])**2
+        dist **= (1/2)
+
+        brightness = max(0, int(255*((600 - dist)/600)))
+        self.sprite.set_alpha(brightness)
     
 if __name__ == "__main__":
     from pygame import init

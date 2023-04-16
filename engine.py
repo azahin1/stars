@@ -21,8 +21,9 @@ class Engine:
             self.window.blitSprite(self.player)
             for star in self.backgroundStars:
                 star.move(self.window.getKeysPressed())
+                star.proximity(self.player)
                 self.window.blitSprite(star)
-                
+
             self.window.updateScreen()
 
 if __name__ == "__main__":
