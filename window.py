@@ -3,6 +3,7 @@ Title: Window frame
 '''
 import pygame
 from json import load
+from sounds import Sounds
 
 class Window:
     def __init__(self):

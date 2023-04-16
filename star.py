@@ -11,11 +11,12 @@ class Star(Sprite): # inherits from Sprite class
         Sprite.__init__(self, window)
         with open("loader.json") as f:
             data = load(f)
-        self.setDimentions(2, 2)
+        size = randint(1, 5)
+        self.setDimentions(size, size)
         self.setPOS(randint(0, self.window.getDimentions()[0] - self.getDimentions()[0]), randint(0, self.window.getDimentions()[1] - self.getDimentions()[1]))
         self.setColour(data["colour"]["star"])
         self.sprite.set_alpha(0)
-        self.accValue = 0.5
+        self.accValue = (size + 2)/10
         self.friction = -0.1
         self.velocity = [0, 0]
         self.accelaration = [0, 0]

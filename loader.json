@@ -6,5 +6,8 @@
         "background": [7, 10, 12],
         "star": [170, 180, 190],
         "player": [190, 200, 210]
+    },
+    "notes": {
+        "drone": ["pad_2g.wav", "pad_3a.wav", "pad_3c.wav", "pad_3d.wav", "pad_3f.wav", "pad_3g.wav", "pad_4a.wav", "pad_4c.wav", "pad_4d.wav", "pad_4f.wav", "pad_4g.wav"]
     }
 }
