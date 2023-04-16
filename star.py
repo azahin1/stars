@@ -55,7 +55,7 @@ class Star(Sprite): # inherits from Sprite class
             dist += (self.pos[i] - player.getPOS()[i])**2
         dist **= (1/2)
 
-        brightness = max(0, int(255*((600 - dist)/600)))
+        brightness = max(0, int(255*((player.getRange() - dist)/player.getRange())))
         self.sprite.set_alpha(brightness)
     
 if __name__ == "__main__":
