@@ -24,7 +24,7 @@ class Engine:
             self.window.blitSprite(self.player)
             self.player.playSounds()
 
-            if not self.frameCount%60 and len(self.pluckStars) < 15:
+            if not self.frameCount % 60 and len(self.pluckStars) < 20:
                 self.pluckStars.append(PluckStar(self.window))
             
             for pluck in self.pluckStars:
