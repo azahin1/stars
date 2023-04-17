@@ -20,7 +20,7 @@ class Engine:
         self.backgroundStars = [Star(self.window) for _ in range(240)]
         self.pluckStars = []
         self.anchorStars = [AnchorStar(self.window, i + 1) for i in range(5)]
-        self.shootingStars = [ShootingStar(self.window) for _ in range(1)]
+        self.shootingStars = [ShootingStar(self.window) for _ in range(3)]
         self.frameCount = 0
         self.chordNum = 0
 
@@ -62,12 +62,13 @@ class Engine:
             #-- Shooting Stars
             for i, shooting in enumerate(self.shootingStars):
                 shooting.proximity(self.player)
-                if not (self.frameCount + 15*i) % 120 and not shooting.isActive():
+                if not (self.frameCount + 15*i) % 90 and not shooting.isActive():
                     shooting.resetTrejectory()
-                shooting.setChordNum(self.chordNum)
-                shooting.playSounds(self.player)
-                shooting.move(self.window.getKeysPressed())
-                self.window.blitSprite(shooting)
+                if shooting.isActive():
+                    shooting.setChordNum(self.chordNum)
+                    shooting.playSounds(self.player)
+                    shooting.move(self.window.getKeysPressed())
+                    self.window.blitSprite(shooting)
 
             self.window.updateScreen()
             self.frameCount += 1
