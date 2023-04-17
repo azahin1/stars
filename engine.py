@@ -7,6 +7,7 @@ from star import Star
 from playerStar import PlayerStar
 from pluckStar import PluckStar
 from anchorStar import AnchorStar
+from shootingStar import ShootingStar
 import pygame.mixer as mix
 
 class Engine:
@@ -19,6 +20,7 @@ class Engine:
         self.backgroundStars = [Star(self.window) for _ in range(240)]
         self.pluckStars = []
         self.anchorStars = [AnchorStar(self.window, i + 1) for i in range(3)]
+        self.shootingStars = [ShootingStar(self.window) for _ in range(5)]
         self.frameCount = 0
         self.chordNum = 0
 
@@ -57,6 +59,13 @@ class Engine:
                 self.window.blitSprite(anchor)
                 if anchor.inRange(self.player):
                     self.chordNum = anchor.getChordNum()
+
+            #-- Shooting Stars
+            for i, shooting in enumerate(self.shootingStars):
+                if not (self.frameCount + 15*i) % 120:
+                    shooting.resetTrejectory()
+                shooting.move(self.window.getKeysPressed())
+                self.window.blitSprite(shooting)
 
             self.window.updateScreen()
             self.frameCount += 1
