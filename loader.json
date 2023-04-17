@@ -31,5 +31,17 @@
     "chord3": {
         "drone": ["pad_3g.wav"],
         "pluck": ["3g"]
+    },
+    "chord4": {
+        "drone": ["pad_4a.wav"],
+        "pluck": ["2a"]
+    },
+    "chord5": {
+        "drone": ["pad_3f.wav"],
+        "pluck": ["3f"]
+    },
+    "chord6": {
+        "drone": ["pad_3g.wav"],
+        "pluck": ["3g"]
     }
 }

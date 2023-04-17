@@ -3,6 +3,7 @@ title: stars that change the chord
 '''
 from star import Star
 from json import load
+from random import randint
 
 class AnchorStar(Star):
     def __init__(self, window, i):
@@ -11,15 +12,25 @@ class AnchorStar(Star):
             self.data = load(f)
         self.setColour(self.data["colour"]["anchor"])
         self.setDimentions(8, 8)
+        [w, h] = self.window.getDimentions()
+        self.setPOS(randint(w//3, 2*w//3), randint(h//3, 2*h//3))
         self.accValue = 2
         self.chordNum = i
         if i == 1:
-            self.pos[0] += self.window.getDimentions()[0]
-            self.pos[1] -= self.window.getDimentions()[1]
+            self.pos[0] -= self.window.getDimentions()[0]
         if i == 2:
+            self.pos[0] += self.window.getDimentions()[0]
             self.pos[1] += self.window.getDimentions()[1]
         if i == 3:
             self.pos[0] -= self.window.getDimentions()[0]
+            self.pos[1] -= self.window.getDimentions()[1]
+        if i == 4:
+            self.pos[0] += self.window.getDimentions()[0]
+        if i == 5:
+            self.pos[0] -= self.window.getDimentions()[0]
+            self.pos[1] += self.window.getDimentions()[1]
+        if i == 6:
+            self.pos[1] -= self.window.getDimentions()[1]
 
     def bounderies(self, i):
         if self.pos[i] < -self.window.getDimentions()[i]: # start wall
@@ -33,7 +44,7 @@ class AnchorStar(Star):
             dist += (self.pos[i] - player.getPOS()[i])**2
         dist **= (1/2)
 
-        return dist <= player.getRange()
+        return dist < player.getRange()*(0.8)
 
     def getChordNum(self):
         return self.chordNum
