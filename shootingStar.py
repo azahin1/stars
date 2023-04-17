@@ -24,8 +24,7 @@ class ShootingStar(Star):
             self.active = True
 
             trejectory = randint(1, 4)
-            # self.occulation = randint(1, 4)
-            self.occulation = 2
+            self.occulation = randint(2, 3)
             self.rate = randint(30, 60)
             [w, h] = self.window.getDimentions()
             if trejectory == 1: # up right
