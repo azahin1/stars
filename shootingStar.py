@@ -5,6 +5,7 @@ from star import Star
 from json import load
 from random import randint, choice
 from math import sin, cos, radians
+from pygame.mixer import Sound
 
 class ShootingStar(Star):
     def __init__(self, window):
@@ -18,7 +19,8 @@ class ShootingStar(Star):
 
     def resetTrejectory(self):
         trejectory = randint(1, 4)
-        self.occulation = randint(1, 4)
+        # self.occulation = randint(1, 4)
+        self.occulation = 2
         self.rate = randint(30, 60)
         [w, h] = self.window.getDimentions()
         if trejectory == 1: # up right
@@ -34,6 +36,29 @@ class ShootingStar(Star):
             self.pos = choice([[w - self.dimentions[0], randint(0, h//2)] , [randint(w//2, w - self.dimentions[0]), 0]])
             self.speed = [randint(-15, -10), randint(10, 15)]
 
+        r = randint(1, 2)
+        self.arpL = Sound(f"media/sounds/arp_{self.chordNum}{self.occulation}{r}_left.wav")
+        self.arpR = Sound(f"media/sounds/arp_{self.chordNum}{self.occulation}{r}_right.wav")
+        self.arpL.set_volume(0)
+        self.arpR.set_volume(0)
+        self.arpL.play(-1)
+        self.arpR.play(-1)
+        print(f"media/sounds/arp_{self.chordNum}{self.occulation}{r}")
+
+    def playSounds(self, player):
+        dist = 0
+        for i in range(2):
+            dist += (self.pos[i] - player.getPOS()[i])**2
+        dist **= (1/2)
+        dist /= player.getRange()
+        if dist > 1:
+            dist = 1
+        
+        volumeMod = (self.pos[0] - player.getPOS()[0])/player.getRange()
+
+        self.arpL.set_volume(max(0.0, (1 - 1*dist)*0.2*(volumeMod - 1)/-2))
+        self.arpR.set_volume(max(0.0, (1 - 1*dist)*0.2*(volumeMod + 1)/2))
+
     def move(self, keys):
         super().move(keys)
         for i in range(2):
@@ -48,4 +73,6 @@ class ShootingStar(Star):
         self.frame += 1
 
     def bounderies(self, i):
-        pass # empty
+        if self.pos[i] < 0 or self.pos[i] > self.window.getDimentions()[i] - self.getDimentions()[i]: # walls
+            self.arpL.fadeout(100)
+            self.arpR.fadeout(100)
