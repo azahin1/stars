@@ -22,15 +22,12 @@ class AnchorStar(Star):
             self.pos[0] += self.window.getDimentions()[0]
             self.pos[1] += self.window.getDimentions()[1]
         if i == 3:
-            self.pos[0] -= self.window.getDimentions()[0]
             self.pos[1] -= self.window.getDimentions()[1]
         if i == 4:
             self.pos[0] += self.window.getDimentions()[0]
         if i == 5:
             self.pos[0] -= self.window.getDimentions()[0]
             self.pos[1] += self.window.getDimentions()[1]
-        if i == 6:
-            self.pos[1] -= self.window.getDimentions()[1]
 
     def bounderies(self, i):
         if self.pos[i] < -self.window.getDimentions()[i]: # start wall

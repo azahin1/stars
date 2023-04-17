@@ -19,7 +19,7 @@ class Engine:
         self.player = PlayerStar(self.window) # player sprite
         self.backgroundStars = [Star(self.window) for _ in range(240)]
         self.pluckStars = []
-        self.anchorStars = [AnchorStar(self.window, i + 1) for i in range(6)]
+        self.anchorStars = [AnchorStar(self.window, i + 1) for i in range(5)]
         self.shootingStars = [ShootingStar(self.window) for _ in range(5)]
         self.frameCount = 0
         self.chordNum = 0
