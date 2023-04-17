@@ -14,7 +14,7 @@ class AnchorStar(Star):
         self.setDimentions(8, 8)
         [w, h] = self.window.getDimentions()
         self.setPOS(randint(w//3, 2*w//3), randint(h//3, 2*h//3))
-        self.accValue = 2
+        self.accValue = 0.2
         self.chordNum = i
         # player chord is C6
         if i == 1: # Dsus4(add6)

@@ -54,16 +54,15 @@ class Engine:
             #-- Anchor Stars
             self.chordNum = 0
             for anchor in self.anchorStars:
-                # anchor.proximity(self.player)
                 anchor.move(self.window.getKeysPressed())
                 self.window.blitSprite(anchor)
                 if anchor.inRange(self.player):
                     self.chordNum = anchor.getChordNum()
-            print(self.chordNum)
 
             #-- Shooting Stars
             for i, shooting in enumerate(self.shootingStars):
-                if not (self.frameCount + 15*i) % 120:
+                shooting.proximity(self.player)
+                if not (self.frameCount + 15*i) % 120 and not shooting.isActive():
                     shooting.resetTrejectory()
                 shooting.setChordNum(self.chordNum)
                 shooting.playSounds(self.player)
