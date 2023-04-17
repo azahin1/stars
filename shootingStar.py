@@ -4,7 +4,7 @@ title: stars that change the chord
 from star import Star
 from json import load
 from random import randint, choice
-from math import sin, radians
+from math import sin, cos, radians
 
 class ShootingStar(Star):
     def __init__(self, window):
@@ -18,7 +18,7 @@ class ShootingStar(Star):
 
     def resetTrejectory(self):
         trejectory = randint(1, 4)
-        self.occulation = choice([True, False])
+        self.occulation = randint(1, 4)
         self.rate = randint(30, 60)
         [w, h] = self.window.getDimentions()
         if trejectory == 1: # up right
@@ -38,10 +38,10 @@ class ShootingStar(Star):
         super().move(keys)
         for i in range(2):
             self.pos[i] += (self.speed[i])
-        if self.occulation: # vertical
+        if self.occulation in [2, 4]: # vertical
             self.pos[1] += int(sin(radians(self.frame*self.rate)) * self.rate//4)
-        else: # horizontal
-            self.pos[0] += int(sin(radians(self.frame*self.rate)) * self.rate//4)
+        if self.occulation in [3, 4]: # horizontal
+            self.pos[0] += int(cos(radians(self.frame*self.rate)) * self.rate//4)
         self.frame += 1
 
     def bounderies(self, i):
