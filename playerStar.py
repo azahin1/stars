@@ -3,7 +3,7 @@ title: Player's star sprite
 '''
 from star import Star
 from json import load
-from random import choice, randrange
+from random import choice, randint
 from pygame.mixer import Sound
 
 class PlayerStar(Star):
@@ -21,9 +21,13 @@ class PlayerStar(Star):
         self.frames = 0
 
     def playSounds(self):
-        if not self.frames % randrange(self.data["fps"], 6*self.data["fps"], self.data["fps"]//2):
+        if not self.frames % self.data["fps"]//6 and not randint(0, 1):
             note = Sound("media/sounds/" + choice(self.data["chord" + str(self.chordNum)]["drone"]))
             note.set_volume(0.1)
+            note.play()
+        if not self.frames % (self.data["fps"]*5) and not randint(0, 1):
+            note = Sound("media/sounds/" + choice(self.data["chord" + str(self.chordNum)]["bass"]))
+            note.set_volume(0.25)
             note.play()
         self.frames += 1
 

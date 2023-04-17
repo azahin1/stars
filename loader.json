@@ -9,26 +9,32 @@
         "pluck": [244, 253, 173]
     },
     "chord0": {
+        "bass": ["pad_1c.wav", "pad_1g.wav"],
         "drone": ["pad_3c.wav", "pad_3g.wav", "pad_3d.wav", "pad_4c.wav", "pad_4g.wav", "pad_4d.wav"],
         "pluck": ["2c"]
     },
     "chord1": {
+        "bass": ["pad_1d.wav", "pad_1a.wav"],
         "drone": ["pad_3d.wav", "pad_3a.wav", "pad_3e.wav", "pad_4d.wav", "pad_4a.wav", "pad_4e.wav"],
         "pluck": ["2a"]
     },
     "chord2": {
+        "bass": ["pad_1e.wav", "pad_1b.wav"],
         "drone": ["pad_3e.wav", "pad_3b.wav", "pad_3g.wav", "pad_4e.wav", "pad_4b.wav", "pad_4g.wav"],
         "pluck": ["3f"]
     },
     "chord3": {
+        "bass": ["pad_1f.wav", "pad_1c.wav"],
         "drone": ["pad_3f.wav", "pad_3c.wav", "pad_3g.wav", "pad_4f.wav", "pad_4c.wav", "pad_4g.wav"],
         "pluck": ["3g"]
     },
     "chord4": {
+        "bass": ["pad_1g.wav", "pad_1d.wav"],
         "drone": ["pad_3g.wav", "pad_3d.wav", "pad_3a.wav", "pad_4g.wav", "pad_4d.wav", "pad_4a.wav"],
         "pluck": ["2a"]
     },
     "chord5": {
+        "bass": ["pad_1a.wav", "pad_1e.wav"],
         "drone": ["pad_3a.wav", "pad_3e.wav", "pad_3b.wav", "pad_4a.wav", "pad_4e.wav", "pad_4b.wav"],
         "pluck": ["3f"]
     }
