@@ -20,15 +20,12 @@ class Engine:
         self.pluckStars = []
         self.anchorStars = [AnchorStar(self.window, i + 1) for i in range(3)]
         self.frameCount = 0
-        self.chordNum = 1
+        self.chordNum = 0
 
     def run(self):
         while True:
             self.window.getEvents()
             self.window.clearScreen()
-
-            if not self.frameCount % 600:
-                self.chordNum = self.chordNum%2 + 1
 
             if not self.frameCount % 60 and len(self.pluckStars) < 20:
                 self.pluckStars.append(PluckStar(self.window))
@@ -53,11 +50,13 @@ class Engine:
                 self.window.blitSprite(pluck)
 
             #-- Anchor Stars
+            self.chordNum = 0
             for anchor in self.anchorStars:
                 anchor.proximity(self.player)
                 anchor.move(self.window.getKeysPressed())
                 self.window.blitSprite(anchor)
-
+                if anchor.inRange(self.player):
+                    self.chordNum = anchor.getChordNum()
 
             self.window.updateScreen()
             self.frameCount += 1

@@ -16,12 +16,20 @@
         "drone": ["pad_2g.wav", "pad_3c.wav", "pad_3d.wav", "pad_3g.wav", "pad_4c.wav", "pad_4d.wav",  "pad_4g.wav"],
         "pluck": ["1c", "1d", "1g",  "2c", "2d", "2g", "3c", "3d", "3g"]
     },
-    "chord1": {
+    "chord0": {
         "drone": ["pad_3c.wav"],
         "pluck": ["2c"]
     },
-    "chord2": {
+    "chord1": {
         "drone": ["pad_4a.wav"],
         "pluck": ["2a"]
+    },
+    "chord2": {
+        "drone": ["pad_3f.wav"],
+        "pluck": ["3f"]
+    },
+    "chord3": {
+        "drone": ["pad_3g.wav"],
+        "pluck": ["3g"]
     }
 }

@@ -26,3 +26,14 @@ class AnchorStar(Star):
             self.pos[i] = self.window.getDimentions()[i]*2 - self.getDimentions()[i]
         if self.pos[i] > self.window.getDimentions()[i]*2 - self.getDimentions()[i]: # end wall
             self.pos[i] = -self.window.getDimentions()[i]
+
+    def inRange(self, player):
+        dist = 0
+        for i in range(2):
+            dist += (self.pos[i] - player.getPOS()[i])**2
+        dist **= (1/2)
+
+        return dist <= player.getRange()
+
+    def getChordNum(self):
+        return self.chordNum
