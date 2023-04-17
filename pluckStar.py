@@ -4,14 +4,14 @@ title: stars that pluck
 from star import Star
 from json import load
 from random import choice, randint
-import pygame.mixer as mix
+from pygame.mixer import Sound
 
 class PluckStar(Star):
     def __init__(self, window):
         Star.__init__(self, window)
         with open("loader.json") as f:
             self.data = load(f)
-        self.size = randint(3, 6)
+        self.size = choice([1, 2, 3, 4, 5, 5, 6, 7])
         self.accValue = (self.size + 2)/10
         self.setDimentions(self.size, self.size)
         self.setColour(self.data["colour"]["pluck"])
@@ -58,8 +58,8 @@ class PluckStar(Star):
 
     def setChord(self):
         note = f"pluck_{choice(self.data['chord' + str(self.chordNum)]['pluck'])}"
-        self.noteL = mix.Sound("media/sounds/" + note + "_left.wav")
-        self.noteR = mix.Sound("media/sounds/" + note + "_right.wav")
+        self.noteL = Sound("media/sounds/" + note + "_left.wav")
+        self.noteR = Sound("media/sounds/" + note + "_right.wav")
 
     def setChordNum(self, num):
         self.chordNum = num

@@ -3,7 +3,7 @@ title: Star sprite
 '''
 from sprites import Sprite
 from pygame import K_UP, K_DOWN, K_LEFT, K_RIGHT, K_w, K_a, K_s, K_d
-from random import randint, choice
+from random import randint
 from json import load
 
 class Star(Sprite): # inherits from Sprite class

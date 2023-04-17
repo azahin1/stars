@@ -6,6 +6,7 @@ from window import Window
 from star import Star
 from playerStar import PlayerStar
 from pluckStar import PluckStar
+from anchorStar import AnchorStar
 import pygame.mixer as mix
 
 class Engine:
@@ -17,6 +18,7 @@ class Engine:
         self.player = PlayerStar(self.window) # player sprite
         self.backgroundStars = [Star(self.window) for _ in range(240)]
         self.pluckStars = []
+        self.anchorStars = [AnchorStar(self.window, i + 1) for i in range(3)]
         self.frameCount = 0
         self.chordNum = 1
 
@@ -25,16 +27,24 @@ class Engine:
             self.window.getEvents()
             self.window.clearScreen()
 
-            self.window.blitSprite(self.player)
-            self.player.setChordNum(self.chordNum)
-            self.player.playSounds()
-
             if not self.frameCount % 600:
                 self.chordNum = self.chordNum%2 + 1
 
             if not self.frameCount % 60 and len(self.pluckStars) < 20:
                 self.pluckStars.append(PluckStar(self.window))
             
+            #-- Background Stars
+            for star in self.backgroundStars:
+                star.proximity(self.player)
+                star.move(self.window.getKeysPressed())
+                self.window.blitSprite(star)
+    
+            #-- Player Star
+            self.player.setChordNum(self.chordNum)
+            self.player.playSounds()
+            self.window.blitSprite(self.player)
+
+            #-- Pluck Stars
             for pluck in self.pluckStars:
                 pluck.proximity(self.player)
                 pluck.playSounds(self.player)
@@ -42,10 +52,12 @@ class Engine:
                 pluck.move(self.window.getKeysPressed())
                 self.window.blitSprite(pluck)
 
-            for star in self.backgroundStars:
-                star.proximity(self.player)
-                star.move(self.window.getKeysPressed())
-                self.window.blitSprite(star)
+            #-- Anchor Stars
+            for anchor in self.anchorStars:
+                anchor.proximity(self.player)
+                anchor.move(self.window.getKeysPressed())
+                self.window.blitSprite(anchor)
+
 
             self.window.updateScreen()
             self.frameCount += 1
