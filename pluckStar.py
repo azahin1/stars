@@ -3,8 +3,8 @@ title: stars that pluck
 '''
 from star import Star
 from json import load
-from sounds import Sounds
 from random import choice, randint
+import pygame.mixer as mix
 
 class PluckStar(Star):
     def __init__(self, window):
@@ -14,11 +14,8 @@ class PluckStar(Star):
         self.size = randint(3, 6)
         self.accValue = (self.size + 2)/10
         self.setDimentions(self.size, self.size)
-        self.setColour(self.data["colour"]["player"])
-        note = f"pluck_{choice(self.data['notes']['pluck'])}"
-        loader = Sounds.getInstance()
-        self.noteL = loader.getSounds()[note + "_left.wav"]
-        self.noteR = loader.getSounds()[note + "_right.wav"]
+        self.setColour(self.data["colour"]["pluck"])
+        self.setChord()
         self.frameCount = 0
         self.alpha = 0
         self.rate = self.size*self.data["fps"] + randint(0, 15)
@@ -47,6 +44,23 @@ class PluckStar(Star):
             self.alpha = 0
         self.sprite.set_alpha(self.alpha)
         self.frameCount += 1
+    
+    def bounderies(self, i):
+        j = (i + 1)%2
+        if self.pos[i] < 0: # start wall
+            self.pos[i] = self.window.getDimentions()[i] - self.getDimentions()[i]
+            self.pos[j] = randint(0, self.window.getDimentions()[j] - self.getDimentions()[j])
+            self.setChord()
+        if self.pos[i] > self.window.getDimentions()[i] - self.getDimentions()[i]: # end wall
+            self.pos[i] = 0
+            self.pos[j] = randint(0, self.window.getDimentions()[j] - self.getDimentions()[j])
+            self.setChord()
 
-    def getRange(self):
-        return self.range
+    def setChord(self):
+        note = f"pluck_{choice(self.data['chord' + str(self.chordNum)]['pluck'])}"
+        self.noteL = mix.Sound("media/sounds/" + note + "_left.wav")
+        self.noteR = mix.Sound("media/sounds/" + note + "_right.wav")
+
+    def setChordNum(self, num):
+        self.chordNum = num
+        self.setChord()

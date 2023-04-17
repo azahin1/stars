@@ -19,6 +19,7 @@ class Star(Sprite): # inherits from Sprite class
         self.friction = -0.1
         self.velocity = [0, 0]
         self.accelaration = [0, 0]
+        self.chordNum = 1
         
     def move(self, keys): # moving the paddle with key presses
         self.accelaration = [0, 0] # reset acceleration
@@ -38,19 +39,18 @@ class Star(Sprite): # inherits from Sprite class
             self.accelaration[i] += self.velocity[i] * self.friction
             self.velocity[i] += self.accelaration[i]
             self.pos[i] += self.velocity[i] + self.accelaration[i]/2
+            self.bounderies(i)
 
-            #-- bounderies
-            j = (i + 1)%2
-            if self.pos[i] < 0: # start wall
-                self.pos[i] = self.window.getDimentions()[i] - self.getDimentions()[i]
-                self.pos[j] = randint(0, self.window.getDimentions()[j] - self.getDimentions()[j])
-                self.note = f"pluck_{choice(self.data['notes']['pluck'])}"
-                self.size = randint(1, 5)
-            if self.pos[i] > self.window.getDimentions()[i] - self.getDimentions()[i]: # end wall
-                self.pos[i] = 0
-                self.pos[j] = randint(0, self.window.getDimentions()[j] - self.getDimentions()[j])
-                self.note = f"pluck_{choice(self.data['notes']['pluck'])}"
-                self.size = randint(1, 5)
+    def bounderies(self, i):
+        j = (i + 1)%2
+        if self.pos[i] < 0: # start wall
+            self.pos[i] = self.window.getDimentions()[i] - self.getDimentions()[i]
+            self.pos[j] = randint(0, self.window.getDimentions()[j] - self.getDimentions()[j])
+            self.size = randint(1, 5)
+        if self.pos[i] > self.window.getDimentions()[i] - self.getDimentions()[i]: # end wall
+            self.pos[i] = 0
+            self.pos[j] = randint(0, self.window.getDimentions()[j] - self.getDimentions()[j])
+            self.size = randint(1, 5)
 
     def proximity(self, player):
         dist = 0
@@ -60,6 +60,9 @@ class Star(Sprite): # inherits from Sprite class
 
         brightness = max(0, int(255*((player.getRange() - dist)/player.getRange())))
         self.sprite.set_alpha(brightness)
+    
+    def setChordNum(self, num):
+        self.chordNum = num
 
 if __name__ == "__main__":
     from pygame import init
