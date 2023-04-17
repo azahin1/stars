@@ -38,10 +38,13 @@ class ShootingStar(Star):
         super().move(keys)
         for i in range(2):
             self.pos[i] += (self.speed[i])
-        if self.occulation in [2, 4]: # vertical
+        if self.occulation == 2: # vertical
             self.pos[1] += int(sin(radians(self.frame*self.rate)) * self.rate//4)
-        if self.occulation in [3, 4]: # horizontal
+        if self.occulation == 3: # horizontal
             self.pos[0] += int(cos(radians(self.frame*self.rate)) * self.rate//4)
+        if self.occulation == 4: # circular
+            self.pos[1] += int(sin(radians(self.frame*self.rate//2)) * self.rate//2)
+            self.pos[0] += int(cos(radians(self.frame*self.rate//2)) * self.rate//2)
         self.frame += 1
 
     def bounderies(self, i):
