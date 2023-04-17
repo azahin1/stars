@@ -16,16 +16,17 @@ class AnchorStar(Star):
         self.setPOS(randint(w//3, 2*w//3), randint(h//3, 2*h//3))
         self.accValue = 2
         self.chordNum = i
-        if i == 1:
+        # player chord is C6
+        if i == 1: # Dsus4(add6)
             self.pos[0] -= self.window.getDimentions()[0]
-        if i == 2:
+        if i == 2: # Emin7
             self.pos[0] += self.window.getDimentions()[0]
             self.pos[1] += self.window.getDimentions()[1]
-        if i == 3:
+        if i == 3: # Emin/F
             self.pos[1] -= self.window.getDimentions()[1]
-        if i == 4:
+        if i == 4: # G7
             self.pos[0] += self.window.getDimentions()[0]
-        if i == 5:
+        if i == 5: # Csus2/A
             self.pos[0] -= self.window.getDimentions()[0]
             self.pos[1] += self.window.getDimentions()[1]
 

@@ -11,31 +11,31 @@
     "chord0": {
         "bass": ["pad_1c.wav", "pad_1g.wav"],
         "drone": ["pad_3c.wav", "pad_3g.wav", "pad_3d.wav", "pad_4c.wav", "pad_4g.wav", "pad_4d.wav"],
-        "pluck": ["2c"]
+        "pluck": ["1c", "1e", "1g", "1a", "2c", "2e", "2g", "2a", "3c", "3e", "3g", "3a"]
     },
     "chord1": {
         "bass": ["pad_1d.wav", "pad_1a.wav"],
         "drone": ["pad_3d.wav", "pad_3a.wav", "pad_3e.wav", "pad_4d.wav", "pad_4a.wav", "pad_4e.wav"],
-        "pluck": ["2a"]
+        "pluck": ["1d", "1g", "1a", "1b", "2d", "2g", "2a", "2b", "3d", "3g", "3a", "3b"]
     },
     "chord2": {
         "bass": ["pad_1e.wav", "pad_1b.wav"],
         "drone": ["pad_3e.wav", "pad_3b.wav", "pad_3g.wav", "pad_4e.wav", "pad_4b.wav", "pad_4g.wav"],
-        "pluck": ["3f"]
+        "pluck": ["1e", "1g", "1b", "1d", "2e", "2g", "2b", "2d", "3e", "3g", "3b", "3d"]
     },
     "chord3": {
         "bass": ["pad_1f.wav", "pad_1c.wav"],
         "drone": ["pad_3f.wav", "pad_3c.wav", "pad_3g.wav", "pad_4f.wav", "pad_4c.wav", "pad_4g.wav"],
-        "pluck": ["3g"]
+        "pluck": ["1f", "1g", "1b", "1e", "2f", "2g", "2b", "2e", "3f", "3g", "3b", "3e"]
     },
     "chord4": {
         "bass": ["pad_1g.wav", "pad_1d.wav"],
         "drone": ["pad_3g.wav", "pad_3d.wav", "pad_3a.wav", "pad_4g.wav", "pad_4d.wav", "pad_4a.wav"],
-        "pluck": ["2a"]
+        "pluck": ["1g", "1b", "1d", "1f", "2g", "2b", "2d", "2f", "3g", "3b", "3d", "3f"]
     },
     "chord5": {
         "bass": ["pad_1a.wav", "pad_1e.wav"],
         "drone": ["pad_3a.wav", "pad_3e.wav", "pad_3b.wav", "pad_4a.wav", "pad_4e.wav", "pad_4b.wav"],
-        "pluck": ["3f"]
+        "pluck": ["1a", "1c", "1d", "1g", "2a", "2c", "2d", "2g", "3a", "3c", "3d", "3g"]
     }
 }

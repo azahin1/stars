@@ -29,7 +29,7 @@ class Engine:
             self.window.getEvents()
             self.window.clearScreen()
 
-            if not self.frameCount % 60 and len(self.pluckStars) < 20:
+            if not self.frameCount % 60 and len(self.pluckStars) < 30:
                 self.pluckStars.append(PluckStar(self.window))
             
             #-- Background Stars

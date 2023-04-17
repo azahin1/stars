@@ -21,7 +21,7 @@ class PlayerStar(Star):
         self.frames = 0
 
     def playSounds(self):
-        if not self.frames % self.data["fps"]//6 and not randint(0, 1):
+        if not self.frames % self.data["fps"]//6 and not randint(0, 3):
             note = Sound("media/sounds/" + choice(self.data["chord" + str(self.chordNum)]["drone"]))
             note.set_volume(0.1)
             note.play()
