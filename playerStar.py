@@ -5,7 +5,7 @@ from star import Star
 from json import load
 from random import choice, randint
 from pygame.mixer import Sound
-from pygame import K_SPACE, K_RETURN
+from pygame import K_SPACE, K_RETURN, K_UP, K_DOWN, K_LEFT, K_RIGHT, K_w, K_a, K_s, K_d
 
 class PlayerStar(Star):
     def __init__(self, window):
@@ -45,12 +45,20 @@ class PlayerStar(Star):
                 diff = 10
             self.colour[i] += diff
         self.setColour(self.colour)
+        for key in [K_UP, K_DOWN, K_LEFT, K_RIGHT, K_w, K_a, K_s, K_d]:
+            if self.window.getKeysPressed()[key]:
+                self.brightness = 255
         self.glow()
 
         return keys[K_RETURN] or keys[K_SPACE]
 
     def glow(self, span = True):
+        if self.brightness < 200:
+            self.brightness = 200
+        else:
+            self.brightness -= 5
         self.sprite.set_alpha(self.brightness)
+
         if span:
             self.range += 20
             if self.range > self.maxRange:

@@ -25,13 +25,20 @@ class Engine:
 
         #-- Sprites
         self.player = PlayerStar(self.window) # player sprite
-        self.anchorStars = [AnchorStar(self.window, i + 1) for i in range(5)]
-        self.shootingStars = [ShootingStar(self.window) for _ in range(4)]
         self.backgroundStars = [Star(self.window) for _ in range(300)]
+        self.shootingStars = [ShootingStar(self.window) for _ in range(4)]
 
         #-- Texts
-        self.tutorialText1 = Text(self.window, "move using", 25)
-        self.tutorialText2 = Text(self.window, "Arrow Keys", 25)
+        self.tutorialText2 = Text(self.window, "Move using Arrow Keys")
+        self.tutorialText2.setPOS(self.window.getDimentions()[0] - self.tutorialText2.getDimentions()[0] - 10, self.window.getDimentions()[1] - self.tutorialText2.getDimentions()[1] - 5)
+        
+        self.title = Text(self.window, "Stars", 100)
+        self.title.setPOS(self.window.getDimentions()[0]//2 - self.title.getDimentions()[0]//2, self.window.getDimentions()[1]//2 - self.title.getDimentions()[0] - 20)
+        self.subtitle = Text(self.window, "Abrar Zahin", 15)
+        self.subtitle.setPOS(self.window.getDimentions()[0]//2 - self.subtitle.getDimentions()[0]//2, self.title.getPOS()[1] + self.title.getDimentions()[1])
+
+        self.tutorialText3 = Text(self.window, "Press Enter to finish")
+        self.tutorialText3.setPOS(10, self.window.getDimentions()[1] - self.tutorialText3.getDimentions()[1] - 5)
 
     def run(self):
         while True:
@@ -50,6 +57,13 @@ class Engine:
             self.updateScreen()
 
     def phase0(self):
+        if self.frameCount == 0 or self.frameCount == 1:
+            self.anchorStars = [AnchorStar(self.window, i + 1) for i in range(5)]
+
+        self.title.modAlpha(8)
+        self.subtitle.modAlpha(8)
+        self.tutorialText2.modAlpha(8)
+
         self.player.setColour([253, 253, 151])
         self.player.glow(True)
         self.player.playSounds()
@@ -105,10 +119,9 @@ class Engine:
                 shot.move(self.window.getKeysPressed())
 
         #-- Tutorial Texts
-        self.tutorialText2.setPOS(self.window.getDimentions()[0] - self.tutorialText2.getDimentions()[0] - 10, self.window.getDimentions()[1] - self.tutorialText2.getDimentions()[1] - 5)
-        self.tutorialText1.setPOS(self.window.getDimentions()[0] - self.tutorialText1.getDimentions()[0] - 10, self.tutorialText2.getPOS()[1] - self.tutorialText1.getDimentions()[1] + 10)
-        self.tutorialText1.modAlpha(8)
-        self.tutorialText2.modAlpha(8)
+        self.title.modAlpha(-18)
+        self.subtitle.modAlpha(-18)
+        self.tutorialText3.modAlpha(8)
 
         if cont:
             self.player.setBass(False)
@@ -143,7 +156,12 @@ class Engine:
             for shot in self.shootingStars:
                 shot.fade()
 
+            #-- Texts
+            self.tutorialText2.modAlpha(-18)
+            self.tutorialText3.modAlpha(-18)
+
         if self.frameCount == 180:
+            self.player.setColour([253, 253, 151])
             self.player.glow(False)
             end = mix.Sound("media/sounds/end_pluck.wav")
             end.set_volume(0.25)
@@ -177,8 +195,10 @@ class Engine:
                 self.window.blitSprite(shot)
 
         #-- Texts
-        self.window.blitSprite(self.tutorialText1)
+        self.window.blitSprite(self.title)
+        self.window.blitSprite(self.subtitle)
         self.window.blitSprite(self.tutorialText2)
+        self.window.blitSprite(self.tutorialText3)
 
         self.window.updateScreen()
 
