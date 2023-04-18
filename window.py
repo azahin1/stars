@@ -3,6 +3,7 @@ Title: Window frame
 '''
 import pygame
 from json import load
+from sys import exit
 
 class Window:
     def __init__(self):
