@@ -24,7 +24,7 @@ class ShootingStar(Star):
             self.active = True
 
             trejectory = randint(1, 4)
-            self.occulation = randint(2, 3)
+            self.occulation = choice([2, 2, 3, 3, 4])
             self.rate = randint(30, 60)
             [w, h] = self.window.getDimentions()
             if trejectory == 1: # up right
@@ -40,7 +40,7 @@ class ShootingStar(Star):
                 self.pos = choice([[w - self.dimentions[0], randint(0, h//3)] , [randint(2*w//3, w - self.dimentions[0]), 0]])
                 self.speed = [randint(-15, -10), randint(8, 12)]
 
-            r = randint(1, 2)
+            r = randint(1, 2) if self.occulation != 4 else 0
             self.arpL = Sound(f"media/sounds/arp_{self.chordNum}{self.occulation}{r}_left.wav")
             self.arpR = Sound(f"media/sounds/arp_{self.chordNum}{self.occulation}{r}_right.wav")
             self.arpL.set_volume(0)
