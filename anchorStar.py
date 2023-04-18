@@ -48,7 +48,7 @@ class AnchorStar(Star):
 
     def move(self, keys):
         super().move(keys)
-        self.sprite.set_alpha(200 + int(55*sin(radians(self.frameCount))))
+        # self.sprite.set_alpha(200 + int(55*sin(radians(self.frameCount))))
         self.frameCount = (self.frameCount + 10) % 360
 
     def getChordNum(self):

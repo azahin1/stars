@@ -51,7 +51,8 @@ class Engine:
             }[self.phase]()
 
             self.frameCount += 1
-            self.updateScreen()
+            if self.frameCount % 4:
+                self.updateScreen()
 
     def phase0(self):
         if self.frameCount == 0 or self.frameCount == 1:

@@ -1,6 +1,6 @@
 {
     "title": "Stars",
-    "fps": 24,
+    "fps": 30,
     "dimentions": [1294, 800],
     "colour": {
         "background": [7, 10, 12],
