@@ -4,17 +4,19 @@ title: stars that change the chord
 from star import Star
 from json import load
 from random import randint
+from math import sin, radians
 
 class AnchorStar(Star):
     def __init__(self, window, i):
         super().__init__(window)
         with open("loader.json") as f:
             self.data = load(f)
-        self.setColour(self.data["colour"]["anchor"])
+        self.setColour(self.data["colour"]["anchor"][i])
         self.setDimentions(8, 8)
         [w, h] = self.window.getDimentions()
         self.setPOS(randint(w//3, 2*w//3), randint(h//3, 2*h//3))
         self.accValue = 2
+        self.frameCount = 0
         self.chordNum = i
         # player chord is C6
         if i == 1: # Dsus4(add6)
@@ -42,7 +44,12 @@ class AnchorStar(Star):
             dist += (self.pos[i] - player.getPOS()[i])**2
         dist **= (1/2)
 
-        return dist < player.getRange()*(0.8)
+        return dist < player.getRange()*(0.5)
+
+    def move(self, keys):
+        super().move(keys)
+        self.sprite.set_alpha(200 + int(55*sin(radians(self.frameCount))))
+        self.frameCount = (self.frameCount + 10) % 360
 
     def getChordNum(self):
         return self.chordNum

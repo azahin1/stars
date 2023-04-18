@@ -3,7 +3,7 @@ title: Star sprite
 '''
 from sprites import Sprite
 from pygame import K_UP, K_DOWN, K_LEFT, K_RIGHT, K_w, K_a, K_s, K_d
-from random import randint
+from random import randint, choice
 from json import load
 
 class Star(Sprite): # inherits from Sprite class
@@ -11,10 +11,10 @@ class Star(Sprite): # inherits from Sprite class
         Sprite.__init__(self, window)
         with open("loader.json") as f:
             self.data = load(f)
-        self.size = randint(1, 4)
+        self.size = randint(1, 5)
         self.setDimentions(self.size, self.size)
         self.setPOS(randint(0, self.window.getDimentions()[0] - self.getDimentions()[0]), randint(0, self.window.getDimentions()[1] - self.getDimentions()[1]))
-        self.setColour(self.data["colour"]["star"])
+        self.setColour(choice(self.data["colour"]["star"]))
         self.accValue = (self.size + 2)/10
         self.friction = -0.1
         self.velocity = [0, 0]

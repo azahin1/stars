@@ -16,8 +16,8 @@ class PlayerStar(Star):
             self.window.getDimentions()[0]/2 - self.getDimentions()[0]/2,
             self.window.getDimentions()[1]/2 - self.getDimentions()[1]/2
         )
-        self.setColour(self.data["colour"]["anchor"])
         self.range = int(self.window.getDimentions()[1]*0.7)
+        self.brightness = 200
         self.frames = 0
 
     def playSounds(self):
@@ -30,6 +30,18 @@ class PlayerStar(Star):
             note.set_volume(0.25)
             note.play()
         self.frames += 1
+
+    def move(self, keys):
+        newColour = self.data["colour"]["anchor"][self.chordNum]
+        for i in range(len(self.colour)):
+            diff = newColour[i] - self.colour[i]
+            if diff < -10:
+                diff = -10
+            if diff > 10:
+                diff = 10
+            self.colour[i] += diff
+        self.setColour(self.colour)
+        self.sprite.set_alpha(self.brightness)
 
     def getRange(self):
         return self.range

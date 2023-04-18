@@ -15,15 +15,19 @@ class Engine:
         init()
         mix.init()
         mix.set_num_channels(300)
+
+        #-- Game trackers
         self.window = Window() # game window
+        self.frameCount = 0
+        self.chordNum = 0
+        self.phase = 1
+
+        #-- Sprites
         self.player = PlayerStar(self.window) # player sprite
         self.backgroundStars = [Star(self.window) for _ in range(300)]
         self.pluckStars = []
         self.anchorStars = [AnchorStar(self.window, i + 1) for i in range(5)]
         self.shootingStars = [ShootingStar(self.window) for _ in range(4)]
-        self.frameCount = 0
-        self.chordNum = 0
-        self.phase = 1
 
     def run(self):
         while True:
@@ -42,10 +46,6 @@ class Engine:
             star.proximity(self.player)
             star.move(self.window.getKeysPressed())
 
-        #-- Player Star
-        self.player.setChordNum(self.chordNum)
-        self.player.playSounds()
-
         #-- Pluck Stars
         if not self.frameCount % 60 and len(self.pluckStars) < 30: # adds a pluck star every 2 sec
             self.pluckStars.append(PluckStar(self.window))
@@ -62,6 +62,11 @@ class Engine:
             anchor.move(self.window.getKeysPressed())
             if anchor.inRange(self.player): # changes chord of the song based on which anchor star is near
                 self.chordNum = anchor.getChordNum()
+
+        #-- Player Star
+        self.player.setChordNum(self.chordNum)
+        self.player.playSounds()
+        self.player.move(self.window.getKeysPressed())
 
         #-- Shooting Stars
         for i, shot in enumerate(self.shootingStars):

@@ -17,7 +17,7 @@ class ShootingStar(Star):
         self.active = False
         self.freq = 10
         self.resetTrejectory()
-        self.setColour(self.data["colour"]["anchor"])
+        self.setColour(self.data["colour"]["shot"])
         self.frame = 0
 
     def resetTrejectory(self):
