@@ -5,6 +5,7 @@ from star import Star
 from json import load
 from random import choice, randint
 from pygame.mixer import Sound
+from pygame import K_SPACE, K_RETURN
 
 class PlayerStar(Star):
     def __init__(self, window):
@@ -19,13 +20,14 @@ class PlayerStar(Star):
         self.range = int(self.window.getDimentions()[1]*0.7)
         self.brightness = 200
         self.frames = 0
+        self.bass = False
 
     def playSounds(self):
         if not self.frames % self.data["fps"]//6 and not randint(0, 3):
             note = Sound("media/sounds/" + choice(self.data["chord" + str(self.chordNum)]["drone"]))
             note.set_volume(0.1)
             note.play()
-        if not self.frames % (self.data["fps"]*5) and not randint(0, 1):
+        if not self.frames % (self.data["fps"]*5) and not randint(0, 1) and self.bass:
             note = Sound("media/sounds/" + choice(self.data["chord" + str(self.chordNum)]["bass"]))
             note.set_volume(0.25)
             note.play()
@@ -42,6 +44,11 @@ class PlayerStar(Star):
             self.colour[i] += diff
         self.setColour(self.colour)
         self.sprite.set_alpha(self.brightness)
+
+        return keys[K_RETURN] or keys[K_SPACE]
+
+    def setBass(self, bul):
+        self.bass = bul
 
     def getRange(self):
         return self.range

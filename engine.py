@@ -33,16 +33,17 @@ class Engine:
         #-- Texts
         self.tutorialText1 = Text(self.window, "move using", 25)
         self.tutorialText2 = Text(self.window, "Arrow Keys", 25)
-        self.tutorialText2.setPOS(self.window.getDimentions()[0] - self.tutorialText2.getDimentions()[0] - 10, self.window.getDimentions()[1] - self.tutorialText2.getDimentions()[1] - 5)
-        self.tutorialText1.setPOS(self.window.getDimentions()[0] - self.tutorialText1.getDimentions()[0] - 10, self.tutorialText2.getPOS()[1] - self.tutorialText1.getDimentions()[1] + 10)
 
     def run(self):
         while True:
             self.window.getEvents()
             
-            { # cheeky pythonic switch statement
+            phases = { # cheeky pythonic switch statement
                 1: self.phase1
-            }[self.phase]()
+            }
+
+            if self.phase in phases:
+                phases[self.phase]()
 
             self.frameCount += 1
             self.updateScreen()
@@ -71,9 +72,10 @@ class Engine:
                 self.chordNum = anchor.getChordNum()
 
         #-- Player Star
+        self.player.setBass(True)
         self.player.setChordNum(self.chordNum)
         self.player.playSounds()
-        self.player.move(self.window.getKeysPressed())
+        cont = self.player.move(self.window.getKeysPressed())
 
         #-- Shooting Stars
         for i, shot in enumerate(self.shootingStars):
@@ -88,8 +90,15 @@ class Engine:
                 shot.move(self.window.getKeysPressed())
 
         #-- Tutorial Texts
+        self.tutorialText2.setPOS(self.window.getDimentions()[0] - self.tutorialText2.getDimentions()[0] - 10, self.window.getDimentions()[1] - self.tutorialText2.getDimentions()[1] - 5)
+        self.tutorialText1.setPOS(self.window.getDimentions()[0] - self.tutorialText1.getDimentions()[0] - 10, self.tutorialText2.getPOS()[1] - self.tutorialText1.getDimentions()[1] + 10)
         self.tutorialText1.modAlpha(8)
         self.tutorialText2.modAlpha(8)
+
+        if cont:
+            self.frameCount = 0
+            self.phase += 1
+            self.player.setBass(False)
 
     def updateScreen(self):
         self.window.clearScreen()
