@@ -22,23 +22,25 @@ class Star(Sprite): # inherits from Sprite class
         self.chordNum = 1
         
     def move(self, keys): # moving the paddle with key presses
-        self.accelaration = [0, 0] # reset acceleration
+        # self.accelaration = [0, 0] # reset acceleration
+        self.velocity = [0, 0]
 
         #-- update acceleration when keys are pressed
         if keys[K_LEFT] or keys[K_a]:
-            self.accelaration[0] = self.accValue
+            self.velocity[0] = self.accValue
         if keys[K_RIGHT] or keys[K_d]:
-            self.accelaration[0] = -self.accValue
+            self.velocity[0] = -self.accValue
         if keys[K_UP] or keys[K_w]:
-            self.accelaration[1] = self.accValue
+            self.velocity[1] = self.accValue
         if keys[K_DOWN] or keys[K_s]:
-            self.accelaration[1] = -self.accValue
+            self.velocity[1] = -self.accValue
 
         #-- update position with acceleration
         for i in range(2):
-            self.accelaration[i] += self.velocity[i] * self.friction
-            self.velocity[i] += self.accelaration[i]
-            self.pos[i] += self.velocity[i] + self.accelaration[i]/2
+            # self.accelaration[i] += self.velocity[i] * self.friction
+            # self.velocity[i] += self.accelaration[i]
+            # self.pos[i] += self.velocity[i] + self.accelaration[i]/2
+            self.pos[i] += self.velocity[i]*3
             self.bounderies(i)
 
     def bounderies(self, i):
