@@ -15,12 +15,13 @@ class ShootingStar(Star):
         self.arpL = None
         self.arpR = None
         self.active = False
+        self.freq = 10
         self.resetTrejectory()
         self.setColour(self.data["colour"]["anchor"])
         self.frame = 0
 
     def resetTrejectory(self):
-        if randint(0, 1):
+        if not randint(0, self.freq):
             self.active = True
 
             trejectory = randint(1, 4)
@@ -83,3 +84,8 @@ class ShootingStar(Star):
 
     def isActive(self):
         return self.active
+
+    def decreaseFreq(self):
+        self.freq -= 1
+        if self.freq < 1:
+            self.freq = 1
