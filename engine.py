@@ -15,7 +15,7 @@ class Engine:
     def __init__(self):
         init()
         mix.init()
-        mix.set_num_channels(50)
+        mix.set_num_channels(2)
 
         #-- Game trackers
         self.window = Window() # game window
