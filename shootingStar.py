@@ -24,7 +24,7 @@ class ShootingStar(Star):
             self.active = True
 
             trejectory = randint(1, 4)
-            self.occulation = choice([2, 2, 3, 3, 4])
+            self.occulation = choice([1, 1, 1, 2, 2, 3, 3, 4])
             self.rate = randint(30, 60)
             [w, h] = self.window.getDimentions()
             if trejectory == 1: # up right
@@ -59,8 +59,8 @@ class ShootingStar(Star):
         
         volumeMod = (self.pos[0] - player.getPOS()[0])/player.getRange()
         if self.arpL and self.arpR:
-            self.arpL.set_volume(max(0.0, (1 - dist)*0.15*(volumeMod - 1)/-2))
-            self.arpR.set_volume(max(0.0, (1 - dist)*0.15*(volumeMod + 1)/2))
+            self.arpL.set_volume(max(0.0, (1 - dist)*0.15*(volumeMod - 1)/-2)*(2 if self.occulation == 1 else 1))
+            self.arpR.set_volume(max(0.0, (1 - dist)*0.15*(volumeMod + 1)/2)*(2 if self.occulation == 1 else 1))
 
     def move(self, keys):
         super().move(keys)
