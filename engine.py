@@ -8,6 +8,7 @@ from playerStar import PlayerStar
 from pluckStar import PluckStar
 from anchorStar import AnchorStar
 from shootingStar import ShootingStar
+from text import Text
 import pygame.mixer as mix
 
 class Engine:
@@ -28,6 +29,12 @@ class Engine:
         self.pluckStars = []
         self.anchorStars = [AnchorStar(self.window, i + 1) for i in range(5)]
         self.shootingStars = [ShootingStar(self.window) for _ in range(4)]
+
+        #-- Texts
+        self.tutorialText1 = Text(self.window, "move using", 25)
+        self.tutorialText2 = Text(self.window, "Arrow Keys", 25)
+        self.tutorialText2.setPOS(self.window.getDimentions()[0] - self.tutorialText2.getDimentions()[0] - 10, self.window.getDimentions()[1] - self.tutorialText2.getDimentions()[1] - 5)
+        self.tutorialText1.setPOS(self.window.getDimentions()[0] - self.tutorialText1.getDimentions()[0] - 10, self.tutorialText2.getPOS()[1] - self.tutorialText1.getDimentions()[1] + 10)
 
     def run(self):
         while True:
@@ -80,6 +87,10 @@ class Engine:
                 shot.playSounds(self.player)
                 shot.move(self.window.getKeysPressed())
 
+        #-- Tutorial Texts
+        self.tutorialText1.modAlpha(8)
+        self.tutorialText2.modAlpha(8)
+
     def updateScreen(self):
         self.window.clearScreen()
 
@@ -102,6 +113,10 @@ class Engine:
         for shot in self.shootingStars:
             if shot.isActive():
                 self.window.blitSprite(shot)
+
+        #-- Texts
+        self.window.blitSprite(self.tutorialText1)
+        self.window.blitSprite(self.tutorialText2)
 
         self.window.updateScreen()
 
