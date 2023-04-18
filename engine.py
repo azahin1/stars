@@ -15,7 +15,7 @@ class Engine:
     def __init__(self):
         init()
         mix.init()
-        mix.set_num_channels(2)
+        mix.set_num_channels(50)
 
         #-- Game trackers
         self.window = Window() # game window
@@ -130,7 +130,7 @@ class Engine:
 
     def phase2(self):
         if self.frameCount == 1:
-            end = mix.Sound("media/sounds/end_swell.wav")
+            end = mix.Sound("media/sounds1/end_swell.mp3")
             for shot in self.shootingStars:
                 shot.stop()
             end.set_volume(0.8)
