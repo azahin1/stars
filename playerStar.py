@@ -17,7 +17,8 @@ class PlayerStar(Star):
             self.window.getDimentions()[0]/2 - self.getDimentions()[0]/2,
             self.window.getDimentions()[1]/2 - self.getDimentions()[1]/2
         )
-        self.range = int(self.window.getDimentions()[1]*0.7)
+        self.maxRange = int(self.window.getDimentions()[1]*0.7)
+        self.range = 1
         self.brightness = 200
         self.frames = 0
         self.bass = False
@@ -43,9 +44,21 @@ class PlayerStar(Star):
                 diff = 10
             self.colour[i] += diff
         self.setColour(self.colour)
-        self.sprite.set_alpha(self.brightness)
+        self.glow()
 
         return keys[K_RETURN] or keys[K_SPACE]
+
+    def glow(self):
+        self.sprite.set_alpha(self.brightness)
+        self.range += 20
+        if self.range > self.maxRange:
+            self.range = self.maxRange
+
+    def fade(self):
+        super().fade()
+        self.range -= 20
+        if self.range < 1:
+            self.range = 1
 
     def setBass(self, bul):
         self.bass = bul

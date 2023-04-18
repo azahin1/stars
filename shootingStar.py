@@ -63,6 +63,13 @@ class ShootingStar(Star):
             self.arpL.set_volume(max(0.0, (1 - dist)*0.15*(volumeMod - 1)/-2)*(2 if self.occulation == 1 else 1))
             self.arpR.set_volume(max(0.0, (1 - dist)*0.15*(volumeMod + 1)/2)*(2 if self.occulation == 1 else 1))
 
+    def stop(self):
+        if self.arpL:
+            self.arpL.fadeout(1000)
+        if self.arpR:
+            self.arpR.fadeout(1000)
+        self.sprite.set_alpha(0)
+
     def move(self, keys):
         super().move(keys)
         for i in range(2):

@@ -64,6 +64,9 @@ class Star(Sprite): # inherits from Sprite class
     def setChordNum(self, num):
         self.chordNum = num
 
+    def fade(self):
+        self.sprite.set_alpha(max(0, self.sprite.get_alpha() - 18))
+
 if __name__ == "__main__":
     from pygame import init
     from window import Window

@@ -39,7 +39,8 @@ class Engine:
             self.window.getEvents()
             
             phases = { # cheeky pythonic switch statement
-                1: self.phase1
+                1: self.phase1,
+                2: self.phase2
             }
 
             if self.phase in phases:
@@ -96,9 +97,46 @@ class Engine:
         self.tutorialText2.modAlpha(8)
 
         if cont:
-            self.frameCount = 0
-            self.phase += 1
             self.player.setBass(False)
+            self.frameCount = 0
+            self.phase = 2
+
+    def phase2(self):
+        if self.frameCount == 1:
+            end = mix.Sound("media/sounds/end_swell.wav")
+            for shot in self.shootingStars:
+                shot.stop()
+            end.set_volume(0.8)
+            end.play()
+
+        if self.frameCount > 120 and self.frameCount < 150:
+            #-- Background Stars
+            for star in self.backgroundStars:
+                star.fade()
+
+            #-- Player Star
+            self.player.fade()
+
+            #-- Pluck Stars
+            for pluck in self.pluckStars:
+                pluck.fade()
+
+            #-- Anchor Stars
+            for anchor in self.anchorStars:
+                anchor.fade()
+
+            #-- Shooting Stars
+            for shot in self.shootingStars:
+                shot.fade()
+
+        if self.frameCount == 180:
+            self.player.glow()
+            end = mix.Sound("media/sounds/end_pluck.wav")
+            end.set_volume(0.25)
+            end.play()
+
+        if self.frameCount > 240:
+            self.phase = 0
 
     def updateScreen(self):
         self.window.clearScreen()
