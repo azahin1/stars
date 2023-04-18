@@ -130,7 +130,7 @@ class Engine:
 
     def phase2(self):
         if self.frameCount == 1:
-            end = mix.Sound("media/sounds1/end_swell.mp3")
+            end = mix.Sound("media/sounds/end_swell.mp3")
             for shot in self.shootingStars:
                 shot.stop()
             end.set_volume(0.8)
@@ -163,7 +163,7 @@ class Engine:
         if self.frameCount == 180:
             self.player.setColour([253, 253, 151])
             self.player.glow(False)
-            end = mix.Sound("media/sounds/end_pluck.wav")
+            end = mix.Sound("media/sounds/end_pluck.mp3")
             end.set_volume(0.25)
             end.play()
 

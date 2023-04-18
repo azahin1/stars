@@ -59,8 +59,8 @@ class PluckStar(Star):
 
     def setChord(self):
         note = f"pluck_{choice(self.data['chord' + str(self.chordNum)]['pluck'])}"
-        self.noteL = Sound("media/sounds/" + note + "_left.wav")
-        self.noteR = Sound("media/sounds/" + note + "_right.wav")
+        self.noteL = Sound("media/sounds/" + note + "_left.mp3")
+        self.noteR = Sound("media/sounds/" + note + "_right.mp3")
 
     def setChordNum(self, num):
         self.chordNum = num

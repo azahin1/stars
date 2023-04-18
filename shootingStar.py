@@ -43,8 +43,8 @@ class ShootingStar(Star):
                 self.speed = [randint(-15, -10), randint(8, 12)]
 
             r = randint(1, 2) if self.occulation != 4 else 0
-            self.arpL = Sound(f"media/sounds/arp_{self.chordNum}{self.occulation}{r}_left.wav")
-            self.arpR = Sound(f"media/sounds/arp_{self.chordNum}{self.occulation}{r}_right.wav")
+            self.arpL = Sound(f"media/sounds/arp_{self.chordNum}{self.occulation}{r}_left.mp3")
+            self.arpR = Sound(f"media/sounds/arp_{self.chordNum}{self.occulation}{r}_right.mp3")
             self.arpL.set_volume(0)
             self.arpR.set_volume(0)
             self.arpL.play(-1)
