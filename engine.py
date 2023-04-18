@@ -15,7 +15,7 @@ class Engine:
     def __init__(self):
         init()
         mix.init()
-        mix.set_num_channels(300)
+        mix.set_num_channels(50)
 
         #-- Game trackers
         self.window = Window() # game window
@@ -84,7 +84,7 @@ class Engine:
             star.move(self.window.getKeysPressed())
 
         #-- Pluck Stars
-        if not self.frameCount % 60 and len(self.pluckStars) < 30: # adds a pluck star every 2 sec
+        if not self.frameCount % 60 and len(self.pluckStars) < 15: # adds a pluck star every 2 sec
             self.pluckStars.append(PluckStar(self.window))
 
         for pluck in self.pluckStars: # moving and playing pluck stars
