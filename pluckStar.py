@@ -21,20 +21,20 @@ class PluckStar(Star):
         self.rate = self.size*self.data["fps"] + randint(0, 15)
 
     def playSounds(self, player):
-        dist = 0
-        for i in range(2):
-            dist += (self.pos[i] - player.getPOS()[i])**2
-        dist **= (1/2)
-        dist /= player.getRange()
-        if dist > 1:
-            dist = 1
-        
-        volumeMod = (self.pos[0] - player.getPOS()[0])/player.getRange()
-
-        self.noteL.set_volume((1 - dist)*0.2*(volumeMod - 1)/-2)
-        self.noteR.set_volume((1 - dist)*0.2*(volumeMod + 1)/2)
-
         if self.frameCount == self.rate:
+            dist = 0
+            for i in range(2):
+                dist += (self.pos[i] - player.getPOS()[i])**2
+            dist **= (1/2)
+            dist /= player.getRange()
+            if dist > 1:
+                dist = 1
+            
+            volumeMod = (self.pos[0] - player.getPOS()[0])/player.getRange()
+
+            self.noteL.set_volume((1 - dist)*0.2*(volumeMod - 1)/-2)
+            self.noteR.set_volume((1 - dist)*0.2*(volumeMod + 1)/2)
+            
             self.frameCount = 0
             self.alpha = int((1 - 0.8*dist)*255)
             self.noteL.play(maxtime = 1000)

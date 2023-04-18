@@ -45,9 +45,9 @@ class PlayerStar(Star):
                 diff = 10
             self.colour[i] += diff
         self.setColour(self.colour)
-        for key in [K_UP, K_DOWN, K_LEFT, K_RIGHT, K_w, K_a, K_s, K_d]:
-            if self.window.getKeysPressed()[key]:
-                self.brightness = 255
+        # for key in [K_UP, K_DOWN, K_LEFT, K_RIGHT, K_w, K_a, K_s, K_d]:
+        #     if self.window.getKeysPressed()[key]:
+        #         self.brightness = 255
         self.glow()
 
         return keys[K_RETURN] or keys[K_SPACE]

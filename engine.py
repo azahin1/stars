@@ -25,7 +25,7 @@ class Engine:
 
         #-- Sprites
         self.player = PlayerStar(self.window) # player sprite
-        self.backgroundStars = [Star(self.window) for _ in range(300)]
+        self.backgroundStars = [Star(self.window) for _ in range(100)]
         self.shootingStars = [ShootingStar(self.window) for _ in range(4)]
 
         #-- Texts
@@ -44,14 +44,11 @@ class Engine:
         while True:
             self.window.getEvents()
             
-            phases = { # cheeky pythonic switch statement
+            { # cheeky pythonic switch statement
                 0: self.phase0,
                 1: self.phase1,
                 2: self.phase2
-            }
-
-            if self.phase in phases:
-                phases[self.phase]()
+            }[self.phase]()
 
             self.frameCount += 1
             self.updateScreen()
@@ -84,7 +81,7 @@ class Engine:
             star.move(self.window.getKeysPressed())
 
         #-- Pluck Stars
-        if not self.frameCount % 60 and len(self.pluckStars) < 15: # adds a pluck star every 2 sec
+        if not self.frameCount % 60 and len(self.pluckStars) < 10: # adds a pluck star every 2 sec
             self.pluckStars.append(PluckStar(self.window))
 
         for pluck in self.pluckStars: # moving and playing pluck stars
@@ -164,7 +161,7 @@ class Engine:
             self.player.setColour([253, 253, 151])
             self.player.glow(False)
             end = mix.Sound("media/sounds/end_pluck.mp3")
-            end.set_volume(0.25)
+            end.set_volume(0.2)
             end.play()
 
         if self.frameCount > 240:
