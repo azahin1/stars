@@ -2,6 +2,7 @@
 Title: Window frame
 '''
 import pygame
+from pygame import K_ESCAPE
 from json import load
 from sys import exit
 
@@ -12,9 +13,9 @@ class Window:
         self.title = data["title"] # title of the window
         self.fps = data["fps"] # frames per second
         self.dimentions = data["dimentions"] # dimentions of the window
-        self.background = data["colour"]["background"] # colour of the window
+        self.background = data["colour"]["background"] # colour o`f the window
         self.frame = pygame.time.Clock() # updates the window in a frame
-        self.screen = pygame.display.set_mode(self.dimentions)
+        self.screen = pygame.display.set_mode(self.dimentions, pygame.FULLSCREEN)
         pygame.display.set_icon(pygame.image.load("media/images/logo.ico"))
         self.screen.fill(self.background) # colours the window
         self.caption = pygame.display.set_caption(self.title) # sets the title of the window
@@ -39,6 +40,12 @@ class Window:
                 pygame.quit()
                 exit()
         self.keysPressed = pygame.key.get_pressed()
+
+        if self.keysPressed[K_ESCAPE]:
+            pygame.mixer.quit()
+            pygame.quit()
+            exit()
+
 
     def getDimentions(self): # gets the dimentions of the window
         return self.dimentions
