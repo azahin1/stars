@@ -40,7 +40,7 @@ class Star(Sprite): # inherits from Sprite class
             # self.accelaration[i] += self.velocity[i] * self.friction
             # self.velocity[i] += self.accelaration[i]
             # self.pos[i] += self.velocity[i] + self.accelaration[i]/2
-            self.pos[i] += self.velocity[i]*3
+            self.pos[i] += self.velocity[i]*7
             self.bounderies(i)
 
     def bounderies(self, i):
