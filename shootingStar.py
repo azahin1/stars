@@ -19,6 +19,7 @@ class ShootingStar(Star):
         self.resetTrejectory()
         self.setColour(self.data["colour"]["shot"])
         self.frame = 0
+        self.sprite.set_alpha(0)
 
     def resetTrejectory(self):
         if not randint(0, self.freq):
