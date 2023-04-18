@@ -59,6 +59,7 @@ class Star(Sprite): # inherits from Sprite class
         dist **= (1/2)
 
         brightness = max(0, int(255*((player.getRange() - dist)/player.getRange())))
+        print(player.getRange())
         self.sprite.set_alpha(brightness)
     
     def setChordNum(self, num):

@@ -1,7 +1,7 @@
 '''
 title: Engine (the main game)
 '''
-from pygame import init
+from pygame import init, K_UP, K_DOWN, K_LEFT, K_RIGHT, K_w, K_a, K_s, K_d
 from window import Window
 from star import Star
 from playerStar import PlayerStar
@@ -21,14 +21,13 @@ class Engine:
         self.window = Window() # game window
         self.frameCount = 0
         self.chordNum = 0
-        self.phase = 1
+        self.phase = 0
 
         #-- Sprites
         self.player = PlayerStar(self.window) # player sprite
-        self.backgroundStars = [Star(self.window) for _ in range(300)]
-        self.pluckStars = []
         self.anchorStars = [AnchorStar(self.window, i + 1) for i in range(5)]
         self.shootingStars = [ShootingStar(self.window) for _ in range(4)]
+        self.backgroundStars = [Star(self.window) for _ in range(300)]
 
         #-- Texts
         self.tutorialText1 = Text(self.window, "move using", 25)
@@ -39,6 +38,7 @@ class Engine:
             self.window.getEvents()
             
             phases = { # cheeky pythonic switch statement
+                0: self.phase0,
                 1: self.phase1,
                 2: self.phase2
             }
@@ -48,6 +48,20 @@ class Engine:
 
             self.frameCount += 1
             self.updateScreen()
+
+    def phase0(self):
+        self.player.setColour([253, 253, 151])
+        self.player.glow(True)
+        self.player.playSounds()
+
+        self.pluckStars = []
+        for star in self.backgroundStars:
+            star.proximity(self.player)
+
+        for key in [K_UP, K_DOWN, K_LEFT, K_RIGHT, K_w, K_a, K_s, K_d]:
+            if self.window.getKeysPressed()[key]:
+                self.frameCount = -1
+                self.phase = 1
 
     def phase1(self):
         #-- Background Stars
@@ -112,7 +126,7 @@ class Engine:
         if self.frameCount > 120 and self.frameCount < 150:
             #-- Background Stars
             for star in self.backgroundStars:
-                star.fade()
+                star.proximity(self.player)
 
             #-- Player Star
             self.player.fade()
@@ -130,12 +144,13 @@ class Engine:
                 shot.fade()
 
         if self.frameCount == 180:
-            self.player.glow()
+            self.player.glow(False)
             end = mix.Sound("media/sounds/end_pluck.wav")
             end.set_volume(0.25)
             end.play()
 
         if self.frameCount > 240:
+            self.frameCount = 0
             self.phase = 0
 
     def updateScreen(self):
