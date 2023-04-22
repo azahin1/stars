@@ -1,1 +1,7 @@
 go to python.org/downloads/ and download the latest version of python.
+
+install python (pip needs to be checked)
+
+open up terminal, and write "pip install pygame"
+
+run Stars.py
