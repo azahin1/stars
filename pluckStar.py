@@ -26,14 +26,14 @@ class PluckStar(Star):
             for i in range(2):
                 dist += (self.pos[i] - player.getPOS()[i])**2
             dist **= (1/2)
-            dist /= player.getRange()
-            if dist > 1:
+            dist /= player.getRange() # relative distance from the player star to this star
+            if dist > 1: # range goes from 0 to 1 (1 being max distance, 0 being on the star)
                 dist = 1
             
-            volumeMod = (self.pos[0] - player.getPOS()[0])/player.getRange()
+            volumeMod = (self.pos[0] - player.getPOS()[0])/player.getRange() # left and right volume mod from the horizontal distance of the stars
 
-            self.noteL.set_volume((1 - dist)*0.2*(volumeMod - 1)/-2)
-            self.noteR.set_volume((1 - dist)*0.2*(volumeMod + 1)/2)
+            self.noteL.set_volume((1 - dist)*0.2*(volumeMod - 1)/-2) # modifying left sound
+            self.noteR.set_volume((1 - dist)*0.2*(volumeMod + 1)/2) # modifying right sound
             
             self.frameCount = 0
             self.alpha = int((1 - 0.8*dist)*255)

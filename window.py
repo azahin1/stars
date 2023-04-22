@@ -13,9 +13,9 @@ class Window:
         self.title = data["title"] # title of the window
         self.fps = data["fps"] # frames per second
         self.dimentions = data["dimentions"] # dimentions of the window
-        self.background = data["colour"]["background"] # colour o`f the window
+        self.background = data["colour"]["background"] # colour of the window
         self.frame = pygame.time.Clock() # updates the window in a frame
-        self.screen = pygame.display.set_mode(self.dimentions, pygame.FULLSCREEN)
+        self.screen = pygame.display.set_mode(self.dimentions)
         pygame.display.set_icon(pygame.image.load("media/images/logo.ico"))
         self.screen.fill(self.background) # colours the window
         self.caption = pygame.display.set_caption(self.title) # sets the title of the window
